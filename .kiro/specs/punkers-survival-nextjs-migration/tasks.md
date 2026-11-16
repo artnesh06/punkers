@@ -1,0 +1,381 @@
+# Implementation Plan: Punkers Survival Next.js Migration
+
+## Overview
+
+This implementation plan converts the Punkers Survival HTML game into a modern Next.js 14 application with TypeScript, Prisma ORM, PostgreSQL database, and Ethereum wallet integration. The tasks are organized to build incrementally, validating core functionality early through code and tests.
+
+## Tasks
+
+- [x] 1. Initialize Next.js project and configure development environment
+  - Create Next.js 14 project with TypeScript and App Router
+  - Configure ESLint and Prettier
+  - Set up directory structure (app, components, lib, types, prisma, styles, tests)
+  - Create .env.example with required environment variables
+  - Add .env to .gitignore
+  - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 10.6, 10.7_
+
+- [x] 2. Set up Prisma and database schema
+  - [x] 2.1 Install Prisma and initialize configuration
+    - Install @prisma/client and prisma dev dependency
+    - Create prisma/schema.prisma with PostgreSQL datasource
+    - Configure DATABASE_URL environment variable
+    - _Requirements: 2.1_
+  - [x] 2.2 Define all database models in Prisma schema
+    - Create mst_users model with address, discord, twitter, points fields
+    - Create mst_project model with leaderboard, banner, social media fields
+    - Create mst_collection model with contract address and NFT data
+    - Create mst_reward model with collection and token relations
+    - Create mst_staker model with user, collection, and staking status
+    - Create mst_attributes_reward model for attribute-based rewards
+    - Create trn_point model for point transaction history
+    - Create trn_participant model for participant transactions
+    - _Requirements: 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9_
+  - [x] 2.3 Create Prisma client singleton utility
+    - Implement lib/prisma.ts with singleton pattern for connection pooling
+    - Export getPrismaClient function
+    - _Requirements: 2.10_
+  - [ ]\* 2.4 Write property test for Prisma client singleton
+    - **Property 1: Prisma Client Singleton**
+    - **Validates: Requirements 2.10**
+
+- [x] 3. Configure Wagmi and wallet connection infrastructure
+  - [x] 3.1 Install and configure Wagmi and RainbowKit
+    - Install wagmi, viem, @rainbow-me/rainbowkit dependencies
+    - Create lib/wagmi.ts with Ethereum L1 configuration
+    - Configure supported wallets (MetaMask, WalletConnect, Coinbase)
+    - Set up NEXT_PUBLIC_CHAIN_ID environment variable
+    - _Requirements: 3.1, 3.2, 3.3, 3.5, 10.2_
+  - [x] 3.2 Create WalletButton component
+    - Implement components/wallet/WalletButton.tsx
+    - Handle connect, connecting, and connected states
+    - Display "CONNECT" when disconnected
+    - Display shortened address when connected (0xABC...XYZ format)
+    - Implement disconnect functionality
+    - _Requirements: 3.2, 3.4, 3.6, 3.8_
+  - [ ]\* 3.3 Write property tests for wallet functionality
+    - **Property 2: Address Display Shortening**
+    - **Property 3: Wallet State Persistence**
+    - **Property 4: Wallet Disconnect Cleanup**
+    - **Validates: Requirements 3.4, 3.7, 3.8**
+  - [x] 3.3 Create root layout with wallet providers
+    - Implement app/layout.tsx with RainbowKit and Wagmi providers
+    - Add global styles and metadata
+    - _Requirements: 3.7_
+
+- [x] 4. Implement core UI components
+  - [x] 4.1 Create layout components
+    - Implement components/layout/Navbar.tsx with navigation links
+    - Integrate WalletButton into Navbar
+    - Implement components/layout/Ticker.tsx with scrolling animation
+    - Implement components/layout/Footer.tsx
+    - Add responsive hamburger menu for mobile
+    - _Requirements: 4.3_
+  - [x] 4.2 Create reusable UI components
+    - Implement components/ui/Button.tsx with variants (red, green, outline, gold)
+    - Implement components/ui/Toast.tsx for notifications
+    - _Requirements: 4.3_
+  - [x] 4.3 Create game-specific components
+    - Implement components/game/NFTCard.tsx with staking controls
+    - Implement components/game/StatsPanel.tsx for displaying stats
+    - Implement components/game/ProgressBar.tsx
+    - Implement components/game/Modal.tsx
+    - _Requirements: 4.1, 4.2, 4.3_
+
+- [x] 5. Convert HTML game styles to CSS modules
+  - Extract all CSS from punkers-survival.html
+  - Create styles/globals.css for global styles
+  - Create styles/game.module.css for game-specific styles
+  - Preserve all animations and transitions
+  - Ensure responsive design for mobile and desktop
+  - _Requirements: 4.2, 4.4, 4.5_
+
+- [x] 6. Implement blockchain service layer (read-only operations)
+  - [x] 6.1 Create NFT service for blockchain interactions
+    - Implement lib/blockchain/nft-service.ts
+    - Add getNFTsByOwner function to query NFT ownership
+    - Add getNFTMetadata function to fetch NFT metadata
+    - Configure NEXT_PUBLIC_CONTRACT_ADDRESS environment variable
+    - _Requirements: 6.2, 10.3_
+  - [x] 6.2 Implement retry mechanism for blockchain operations
+    - Create lib/utils/retry.ts with exponential backoff
+    - Implement withRetry function with 3 max retries
+    - _Requirements: 6.5, 6.6, 11.5_
+  - [ ]\* 6.3 Write property test for blockchain retry mechanism
+    - **Property 10: Blockchain Retry Mechanism**
+    - **Validates: Requirements 6.5**
+
+- [x] 7. Implement database service layer
+  - [x] 7.1 Create database service for data operations
+    - Implement lib/services/database-service.ts
+    - Add getUserByAddress and createUser functions
+    - Add updateUserPoints function
+    - Add getStakersByAddress and updateStaker functions
+    - Add getLeaderboard function with pagination
+    - Add getPointTransactions and createPointTransaction functions
+    - _Requirements: 5.2, 5.3, 5.5, 5.6_
+  - [x] 7.2 Create points calculator service
+    - Implement lib/services/points-calculator.ts
+    - Add calculateTotalPoints function
+    - Add calculateNFTPoints function
+    - Add calculateAttributeBonus function
+    - Sum points from NFTs, attributes, and transactions
+    - _Requirements: 7.2, 7.3, 7.4, 7.5, 7.6_
+  - [ ]\* 7.3 Write property test for points calculation
+    - **Property 6: Points Calculation Completeness**
+    - **Validates: Requirements 7.2, 7.3, 7.4, 7.5, 7.6, 7.7**
+
+- [x] 7.5 Implement staking service layer (database-only operations)
+  - [x] 7.5.1 Create staking service for soft-staking operations
+    - Implement lib/services/staking-service.ts
+    - Add stakeNFT function (database update only)
+    - Add unstakeNFT function (database update only)
+    - Add getStakingStatus function (read from database)
+    - Add getStakedNFTs function (query staked NFTs by address)
+    - _Requirements: 5.3, 5.4, 9.3, 9.4_
+  - [ ]\* 7.5.2 Write property test for staking service
+    - **Property 16: Staking State Consistency**
+    - **Validates: Requirements 5.3, 5.4, 9.3, 9.4**
+
+- [x] 8. Implement API routes
+  - [x] 8.1 Create NFT ownership update endpoint
+    - Implement app/api/nft/update-owner/route.ts
+    - Handle POST requests with address parameter
+    - Call blockchain service to get NFT ownership
+    - Update mst_staker table with current ownership
+    - Return success status and updated count
+    - _Requirements: 5.1, 5.2, 6.2, 6.3_
+  - [x] 8.2 Create points total endpoint
+    - Implement app/api/points/total/route.ts
+    - Handle GET requests with address query parameter
+    - Call points calculator service
+    - Return total points with breakdown
+    - _Requirements: 5.3, 5.4, 7.2_
+  - [x] 8.3 Create leaderboard endpoint
+    - Implement app/api/leaderboard/route.ts
+    - Handle GET requests with page and limit query parameters
+    - Default to page=1, limit=50
+    - Query database with pagination
+    - Return entries ordered by points descending
+    - Include pagination metadata (currentPage, totalPages, hasMore)
+    - _Requirements: 5.5, 5.6, 5.7, 8.1, 8.2, 8.3_
+  - [x] 8.4 Create staking endpoints (database-only operations)
+    - Implement app/api/staking/stake/route.ts
+    - Implement app/api/staking/unstake/route.ts
+    - Handle POST requests with address and tokenId parameters
+    - Call staking service to update mst_staker table directly
+    - Return success status and updated staker data
+    - No blockchain transactions required
+    - _Requirements: 5.3, 5.4, 5.5, 5.6, 9.3, 9.4_
+  - [x] 8.5 Add input validation to all API routes
+    - Create lib/utils/validation.ts with validation functions
+    - Validate Ethereum addresses
+    - Validate pagination parameters
+    - Return 400 errors for invalid inputs
+    - _Requirements: 5.8, 5.9_
+  - [x] 8.6 Add error handling to all API routes
+    - Catch database errors and return 500 status
+    - Catch validation errors and return 400 status
+    - Implement user-friendly error messages
+    - _Requirements: 5.9, 5.10, 11.3, 11.4_
+  - [x] 8.7 Create health check endpoint
+    - Implement app/api/health/route.ts
+    - Check database connection
+    - Return health status
+    - _Requirements: 14.7_
+  - [ ]\* 8.8 Write property tests for API validation
+    - **Property 9: Input Validation and Error Responses**
+    - **Validates: Requirements 5.8, 5.9**
+  - [ ]\* 8.9 Write unit tests for API routes
+    - Test POST /api/nft/update-owner with valid and invalid addresses
+    - Test GET /api/points/total with various addresses
+    - Test GET /api/leaderboard with pagination
+    - Test POST /api/staking/stake and /api/staking/unstake
+    - Test error responses for all endpoints
+    - _Requirements: 5.1, 5.3, 5.5, 13.4_
+
+- [x] 9. Checkpoint - Ensure API routes work correctly
+  - Test all API endpoints manually or with automated tests
+  - Verify database connections
+  - Verify blockchain service integration
+  - Ask the user if questions arise
+
+- [x] 10. Implement game pages
+  - [x] 10.1 Create home page
+    - Implement app/page.tsx with game overview
+    - Add hero section and call-to-action
+    - _Requirements: 4.7_
+  - [x] 10.2 Create Gallery page
+    - Implement app/gallery/page.tsx
+    - Display all NFT collections
+    - Show NFT cards with images and metadata
+    - _Requirements: 4.7_
+  - [x] 10.3 Create Rules page
+    - Implement app/rules/page.tsx
+    - Display game rules and instructions
+    - _Requirements: 4.7_
+  - [x] 10.4 Create Stake page (database-only staking)
+    - Implement app/stake/page.tsx
+    - Display user's NFTs with staking status
+    - Add stake/unstake buttons
+    - Show estimated points per day
+    - Disable buttons when wallet not connected
+    - Call staking API endpoints directly (no blockchain transactions)
+    - Update UI immediately after API success
+    - _Requirements: 4.7, 9.1, 9.2, 9.3, 9.4, 9.6, 9.7, 9.8, 9.9_
+  - [x] 10.5 Create Survival page
+    - Implement app/survival/page.tsx
+    - Display active/alive NFTs
+    - _Requirements: 4.7_
+  - [x] 10.6 Create Graveyard page
+    - Implement app/graveyard/page.tsx
+    - Display dead/burned NFTs
+    - _Requirements: 4.7_
+  - [x] 10.7 Create Treasury page
+    - Implement app/treasury/page.tsx
+    - Display treasury information
+    - _Requirements: 4.7_
+  - [x] 10.8 Create Ranks page (Leaderboard)
+    - Implement app/ranks/page.tsx
+    - Fetch leaderboard data from API
+    - Display ranking table with address, points, rank
+    - Implement infinite scroll pagination
+    - Highlight current user in leaderboard
+    - Auto-refresh data every 30 seconds
+    - Show loading state during fetch
+    - Show empty state if no data
+    - _Requirements: 4.7, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8_
+  - [ ]\* 10.9 Write property tests for staking and leaderboard
+    - **Property 5: NFT Ownership Synchronization**
+    - **Property 7: Leaderboard Ordering**
+    - **Property 8: Pagination Consistency**
+    - **Property 11: Staking State Synchronization (database update succeeds)**
+    - **Property 12: NFT Display Completeness**
+    - Note: Staking tests should verify NO blockchain calls are made
+    - **Validates: Requirements 5.2, 5.6, 5.7, 6.2, 6.3, 6.4, 8.1, 8.2, 8.3, 9.1, 9.2, 9.3, 9.4, 9.6, 9.7**
+  - [ ]\* 10.10 Write unit tests for game pages
+    - Test Stake page NFT display and staking controls
+    - Test Ranks page leaderboard display and pagination
+    - Test wallet connection requirements
+    - _Requirements: 13.6_
+
+- [x] 11. Implement logging and error handling
+  - [x] 11.1 Create logging utility
+    - Implement lib/utils/logger.ts
+    - Add log levels (INFO, WARN, ERROR, FATAL)
+    - Log API requests with timestamp and endpoint
+    - Log errors with message, stack trace, and context
+    - Filter sensitive data from logs
+    - _Requirements: 11.1, 11.2, 11.4_
+  - [x] 11.2 Add error boundaries to React components
+    - Create components/ErrorBoundary.tsx
+    - Display fallback UI for critical errors
+    - Log errors to monitoring system
+    - _Requirements: 11.7_
+  - [x] 11.3 Implement graceful error handling
+    - Handle database connection errors
+    - Handle network errors with retry
+    - Display user-friendly error messages
+    - _Requirements: 11.3, 11.5, 11.6_
+  - [ ]\* 11.4 Write property test for logging
+    - **Property 13: Comprehensive Logging**
+    - **Property 14: Network Error Retry**
+    - **Validates: Requirements 11.1, 11.2, 11.4, 11.5**
+
+- [x] 12. Implement performance optimizations
+  - [x] 12.1 Optimize images and assets
+    - Use Next.js Image component for all images
+    - Configure image optimization in next.config.js
+    - _Requirements: 12.1_
+  - [x] 12.2 Implement code splitting and lazy loading
+    - Use dynamic imports for heavy components
+    - Lazy load components not immediately visible
+    - _Requirements: 12.2, 12.5_
+  - [x] 12.3 Add React performance optimizations
+    - Use React.memo for expensive components
+    - Optimize re-renders with useMemo and useCallback
+    - _Requirements: 12.3_
+  - [x] 12.4 Implement API response caching
+    - Add caching layer for leaderboard data
+    - Cache NFT metadata
+    - Invalidate cache on data changes
+    - _Requirements: 12.4_
+  - [ ]\* 12.5 Write property test for caching
+    - **Property 15: API Response Caching**
+    - **Validates: Requirements 12.4**
+
+- [x] 13. Checkpoint - Test complete application flow
+  - Test wallet connection flow
+  - Test NFT staking flow end-to-end
+  - Test leaderboard display and pagination
+  - Verify all pages render correctly
+  - Check responsive design on mobile
+  - Ask the user if questions arise
+
+- [x] 14. Set up testing infrastructure
+  - [x] 14.1 Configure Jest and React Testing Library
+    - Install jest, @testing-library/react, @testing-library/jest-dom
+    - Create jest.config.js
+    - Add test scripts to package.json
+    - _Requirements: 13.1, 13.2_
+  - [x] 14.2 Configure fast-check for property-based testing
+    - Install fast-check dependency
+    - Create test utilities for property testing
+    - Add property test script to package.json
+    - _Requirements: 13.1_
+  - [ ]\* 14.3 Write unit tests for utility functions
+    - Test validation functions
+    - Test retry mechanism
+    - Test address shortening
+    - Test points calculation helpers
+    - _Requirements: 13.5_
+  - [ ]\* 14.4 Write integration tests
+    - Test wallet connection flow
+    - Test NFT staking flow (database-only, verify no blockchain transactions)
+    - Test leaderboard flow
+    - Verify staking operations do not create blockchain transactions
+    - _Requirements: 13.4_
+  - [x] 14.5 Set up CI/CD pipeline
+    - Create .github/workflows/test.yml
+    - Configure PostgreSQL service for tests
+    - Run linter, type check, and all tests
+    - Upload coverage reports
+    - _Requirements: 13.7_
+
+- [x] 15. Configure deployment
+  - [x] 15.1 Create Docker configuration
+    - Create Dockerfile for production build
+    - Create docker-compose.yml for local development
+    - Include PostgreSQL service in docker-compose
+    - _Requirements: 14.1, 14.2_
+  - [x] 15.2 Configure production build
+    - Add build script to package.json
+    - Configure next.config.js for production optimizations
+    - Enable tree shaking and minification
+    - Configure static generation for applicable pages
+    - _Requirements: 14.3, 14.4, 14.5_
+  - [x] 15.3 Add deployment documentation
+    - Document environment variables in README
+    - Add deployment instructions for Vercel
+    - Add local development setup instructions
+    - _Requirements: 14.6_
+
+- [x] 16. Final checkpoint - Complete testing and validation
+  - Run full test suite and ensure all tests pass
+  - Verify Lighthouse performance score >= 80
+  - Test on 3G connection for load time < 3 seconds
+  - Verify all environment variables are documented
+  - Ensure .env is in .gitignore
+  - Ask the user if questions arise
+
+## Notes
+
+- Tasks marked with `*` are optional and can be skipped for faster MVP
+- Each task references specific requirements for traceability
+- Property tests validate universal correctness properties across all inputs
+- Unit tests validate specific examples, edge cases, and integration points
+- Checkpoints ensure incremental validation at key milestones
+- The implementation builds incrementally, with core infrastructure first, then services, then UI
+- Blockchain service is read-only (getNFTsByOwner, getNFTMetadata)
+- Staking operations are database-only (soft-staking) with no blockchain transactions
+- All blockchain read operations include retry mechanisms for reliability
+- All API routes include proper validation and error handling

@@ -1,0 +1,135 @@
+/* ═══ AD LINK ═══ */
+.adLink {
+  color: var(--accent-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.15s;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  display: inline;
+  text-align: left;
+}
+
+.adLink:hover {
+  color: #ff6b6b;
+}
+
+/* ═══ CONFIRM OVERLAY ═══ */
+.confirmOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirmBox {
+  background: #0d0d0d;
+  border: 1px solid var(--accent-red);
+  box-shadow: 0 0 40px rgba(229, 48, 48, 0.15);
+  max-width: 420px;
+  width: 100%;
+  padding: 28px 24px 24px;
+  font-family: var(--font-mono);
+  text-align: center;
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.confirmIcon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.confirmTitle {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.confirmDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.confirmUrl {
+  background: #111;
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--text-primary);
+  word-break: break-all;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.confirmWarn {
+  font-size: 12px;
+  color: var(--accent-yellow, #f0c040);
+  margin: 0 0 20px;
+  letter-spacing: 0.5px;
+}
+
+.confirmActions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cancelBtn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cancelBtn:hover {
+  border-color: #666;
+  color: var(--text-primary);
+}
+
+.proceedBtn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  background: var(--accent-red);
+  border: 1px solid var(--accent-red);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.proceedBtn:hover {
+  background: #c02020;
+}

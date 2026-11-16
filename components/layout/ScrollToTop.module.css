@@ -1,0 +1,50 @@
+/* Matches .back-to-top from HTML reference */
+.btn {
+  position: fixed !important;
+  bottom: 24px !important;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 500;
+  transition: all 0.3s ease;
+  padding: 0;
+  font-family: var(--font-mono);
+}
+
+.btn:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+/* Default position: right side (music closed) */
+.default {
+  right: 24px !important;
+  left: auto !important;
+}
+
+/* When music is open: move to left of music player */
+.withMusic {
+  right: 340px !important; /* 300px (music width) + 20px (music margin) + 20px (gap) */
+  left: auto !important;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    bottom: 16px !important;
+  }
+  
+  .default {
+    right: 16px !important;
+  }
+  
+  .withMusic {
+    right: 332px !important; /* 300px (music width) + 12px (music margin) + 20px (gap) on mobile */
+  }
+}

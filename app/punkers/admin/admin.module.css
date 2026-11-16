@@ -1,0 +1,398 @@
+.page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #eee;
+  font-family: var(--font-mono, 'Share Tech Mono', monospace);
+  /* Cover the main layout (Navbar, Footer) */
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+.loading {
+  text-align: center;
+  padding: 100px 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* ── Login ── */
+.loginWrap {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 120px 20px 40px;
+}
+
+.loginTitle {
+  font-family: var(--font-display, 'Press Start 2P', monospace);
+  font-size: 14px;
+  color: var(--accent-red, #e53030);
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  font-family: var(--font-mono, monospace);
+  font-size: 14px;
+  padding: 12px 14px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  color: #eee;
+  letter-spacing: 0.5px;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-red, #e53030);
+}
+
+.error {
+  color: var(--accent-red, #e53030);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loginBtn {
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 12px;
+  background: var(--accent-red, #e53030);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.loginBtn:hover {
+  background: #ff4040;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #1a1a1a;
+  background: #0d0d0d;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.headerTitle {
+  font-family: var(--font-display, 'Press Start 2P', monospace);
+  font-size: 11px;
+  color: var(--accent-red, #e53030);
+  letter-spacing: 3px;
+}
+
+.logoutBtn {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 6px 16px;
+  background: none;
+  border: 1px solid #333;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  border-color: var(--accent-red, #e53030);
+  color: var(--accent-red, #e53030);
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #1a1a1a;
+  background: #0d0d0d;
+  overflow-x: auto;
+}
+
+.tab {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 14px 24px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: #ccc;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tabActive {
+  color: var(--accent-red, #e53030);
+  border-bottom-color: var(--accent-red, #e53030);
+}
+
+/* ── Action Message ── */
+.actionMsg {
+  padding: 12px 24px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* ── Section ── */
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display, 'Press Start 2P', monospace);
+  font-size: 9px;
+  color: var(--accent-red, #e53030);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* ── Stats Grid ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: #111;
+  border: 1px solid #1a1a1a;
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.statVal {
+  font-family: var(--font-display, 'Press Start 2P', monospace);
+  font-size: 18px;
+  color: #eee;
+  margin-bottom: 6px;
+}
+
+.statLbl {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.green { color: #00ff66; }
+.red { color: #e53030; }
+.yellow { color: #ffcc00; }
+
+/* ── Card ── */
+.card {
+  background: #111;
+  border: 1px solid #1a1a1a;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  font-family: var(--font-display, 'Press Start 2P', monospace);
+  font-size: 8px;
+  color: #888;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 13px;
+}
+
+.cardRow span:first-child {
+  color: #666;
+}
+
+/* ── Table ── */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #111;
+  color: #ccc;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── Badges ── */
+.badge {
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  display: inline-block;
+}
+
+.badge_pending {
+  background: rgba(255, 204, 0, 0.1);
+  color: #ffcc00;
+  border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.badge_active {
+  background: rgba(0, 255, 102, 0.1);
+  color: #00ff66;
+  border: 1px solid rgba(0, 255, 102, 0.3);
+}
+
+.badge_ended {
+  background: rgba(229, 48, 48, 0.1);
+  color: #e53030;
+  border: 1px solid rgba(229, 48, 48, 0.3);
+}
+
+/* ── Buttons ── */
+.actionBtn {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  background: rgba(0, 255, 102, 0.1);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  color: #00ff66;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  background: rgba(0, 255, 102, 0.2);
+}
+
+.dangerBtn {
+  background: rgba(229, 48, 48, 0.1);
+  border-color: rgba(229, 48, 48, 0.3);
+  color: #e53030;
+}
+
+.dangerBtn:hover {
+  background: rgba(229, 48, 48, 0.2);
+}
+
+.submitBtn {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 12px 24px;
+  background: var(--accent-red, #e53030);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 12px;
+}
+
+.submitBtn:hover {
+  background: #ff4040;
+}
+
+/* ── Form ── */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Small input for table cells */
+.inputSmall {
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  padding: 6px 8px;
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  color: #eee;
+  width: 80px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.inputSmall:focus {
+  outline: none;
+  border-color: var(--accent-red, #e53030);
+}
+
+/* ── Config ── */
+.configGrid {
+  display: flex;
+  flex-direction: column;
+}
+
+.configRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 13px;
+}
+
+.configLabel {
+  color: #888;
+}
+
+.configValue {
+  color: #eee;
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .section { padding: 16px; }
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .formGrid { grid-template-columns: 1fr; }
+  .tab { padding: 12px 16px; font-size: 11px; }
+}

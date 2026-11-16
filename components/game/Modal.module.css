@@ -1,0 +1,118 @@
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.overlay.show {
+  display: flex;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.mcont {
+  max-width: 700px;
+  width: 100%;
+  animation: modalPop 0.2s ease-out;
+}
+
+.content {
+  max-width: 480px;
+  width: 100%;
+  animation: modalPop 0.2s ease-out;
+}
+
+.win98 {
+  border: 2px solid var(--border);
+  background: var(--surface);
+  box-shadow: 3px 3px 0px #000;
+}
+
+.win98Title {
+  background: var(--blue);
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+.btn {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  border: 1px solid;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  background: transparent;
+}
+
+.bo {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.bo:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.closeButton:hover {
+  color: var(--red);
+}

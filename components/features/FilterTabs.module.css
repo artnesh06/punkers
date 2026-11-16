@@ -1,0 +1,111 @@
+/* Filter Tabs Container */
+.filterTabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Individual Filter Tab Button */
+.filterTab {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 10px 22px;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Last tab gets right border */
+.filterTab:last-child {
+  border-right: 1px solid var(--border-color);
+}
+
+/* Hover effect */
+.filterTab:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+}
+
+/* Active state styling */
+.filterTab.active {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanline effect for active tab */
+.filterTab.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.filterTab.active span {
+  position: relative;
+  z-index: 2;
+}
+
+/* Adjacent tab border adjustment when active */
+.filterTab.active + .filterTab {
+  border-left-color: var(--accent-red);
+}
+
+/* Scanline effect for buttons (matching HTML source) */
+.filterTab::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateY(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.filterTab:hover::after {
+  transform: translateY(100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 560px) {
+  .filterTabs {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .filterTab {
+    border-right: 1px solid var(--border-color) !important;
+    border-radius: 0;
+    padding: 7px 12px;
+    font-size: 11px;
+  }
+}

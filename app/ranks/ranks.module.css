@@ -1,0 +1,451 @@
+/* Ranks Page */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+/* Total Pool */
+.pool {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 36px 30px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.poolLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+}
+
+.poolValue {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--text-primary);
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+.punkLabel {
+  color: var(--accent-yellow);
+}
+
+/* Pool Stats */
+.poolStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.poolStat {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  text-align: center;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.statValue.yellow {
+  color: var(--accent-yellow);
+  text-shadow: 0 0 12px rgba(255, 204, 0, 0.2);
+}
+
+.statValue.green {
+  color: var(--accent-green);
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.2);
+}
+
+/* Growth Chart */
+.growthSection {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.growthHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.growthTitle {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.growthChart {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 36px
+  );
+}
+
+/* Leaderboard Section */
+.leaderboardSection {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.leaderboardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.lbTitle {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.refreshBtn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.refreshBtn:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.lbSubtitle {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* LB Stats */
+.lbStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.lbStat {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 14px;
+  text-align: center;
+}
+
+/* Table */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.lbTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lbTable th {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lbTable td {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  vertical-align: middle;
+}
+
+.lbTable tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.youRow {
+  background: rgba(255, 204, 0, 0.06);
+  border: 1px solid rgba(255, 204, 0, 0.25);
+}
+
+.youRow td {
+  color: var(--text-primary);
+}
+
+.rankIcon {
+  font-size: 18px;
+}
+
+.addressCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addressAvatar {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.youBadge {
+  font-family: var(--font-display);
+  font-size: 7px;
+  background: var(--accent-green);
+  color: #000;
+  padding: 2px 8px;
+  letter-spacing: 1px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.lbEnd {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 16px 0;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.pageBtn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pageBtn:hover {
+  border-color: var(--accent-red);
+  color: var(--text-primary);
+}
+
+.pageBtn.active {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  color: #fff;
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dots {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 8px 4px;
+}
+
+/* Transactions */
+.transactionsSection {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  min-height: 280px;
+}
+
+.transactionsTitle {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.txEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.txList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.txRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.txRow:last-child {
+  border-bottom: none;
+}
+
+.txIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+
+.txInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.txDesc {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-primary);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.txTime {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.txAmount {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .poolStats {
+    grid-template-columns: 1fr;
+  }
+
+  .lbStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lbTable th:nth-child(3),
+  .lbTable td:nth-child(3),
+  .lbTable th:nth-child(6),
+  .lbTable td:nth-child(6),
+  .lbTable th:nth-child(7),
+  .lbTable td:nth-child(7) {
+    display: none;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .pageBtn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 14px;
+  }
+
+  .poolValue {
+    font-size: 24px;
+  }
+
+  .lbStats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lbTable th:nth-child(5),
+  .lbTable td:nth-child(5),
+  .lbTable th:nth-child(8),
+  .lbTable td:nth-child(8) {
+    display: none;
+  }
+}

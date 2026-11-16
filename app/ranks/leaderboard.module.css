@@ -1,0 +1,270 @@
+/* Header */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: var(--dim);
+  font-family: var(--font-mono);
+}
+
+.sectionLabel {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Timeline */
+.timelinePanel {
+  margin-bottom: 32px;
+  background: rgba(10, 10, 10, 0.4);
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+
+.timelineTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.timelineTable th {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+
+.timelineTable td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.timelineTable tr:last-child td {
+  border-bottom: none;
+}
+
+/* Table */
+.tableHeader {
+  display: grid;
+  grid-template-columns: 70px 1fr 50px 100px 50px 70px 50px;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #1a1a1a;
+  border-bottom: 2px solid var(--border);
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--dim);
+  letter-spacing: 1px;
+  font-family: var(--font-mono);
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 70px 1fr 50px 100px 50px 70px 50px;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #1a1a1a;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  transition: background 0.15s;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.rowSelf {
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+}
+
+.rowSelf:hover {
+  background: rgba(255, 215, 0, 0.12);
+}
+
+.rankCell {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.addressCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.youBadge {
+  font-size: 10px;
+  color: var(--gold);
+  background: rgba(255, 215, 0, 0.2);
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.cell {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.pointsCell {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--dim);
+  font-family: var(--font-mono);
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.pageBtn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary, var(--dim));
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pageBtn:hover {
+  border-color: var(--red);
+  color: var(--text);
+}
+
+.pageBtn.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pageBtn:disabled:hover {
+  border-color: var(--border);
+  color: var(--dim);
+}
+
+.dots {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--dim);
+  padding: 8px 4px;
+}
+
+/* Info list */
+.infoList {
+  list-style: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.infoList li {
+  padding-left: 20px;
+  position: relative;
+  color: var(--text);
+}
+
+.infoList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tableHeader,
+  .row {
+    grid-template-columns: 50px 1fr 40px 80px 40px;
+    font-size: 12px;
+    gap: 4px;
+    padding: 10px 12px;
+  }
+
+  /* Hide AUDITS and EXEC columns on mobile */
+  .tableHeader > div:nth-child(6),
+  .tableHeader > div:nth-child(7),
+  .row > div:nth-child(6),
+  .row > div:nth-child(7) {
+    display: none;
+  }
+
+  .rankCell {
+    font-size: 14px;
+  }
+
+  .addressCell {
+    font-size: 12px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .pageBtn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

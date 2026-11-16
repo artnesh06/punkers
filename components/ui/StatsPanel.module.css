@@ -1,0 +1,168 @@
+/* Stats Grid Container */
+.statsGrid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* Column variants */
+.cols2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cols4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Stat Card */
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+/* Gradient border effects */
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-red),
+    var(--accent-orange),
+    transparent
+  );
+  opacity: 0.55;
+}
+
+.statCard::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-orange),
+    var(--accent-red),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+/* Hover effect */
+.statCard:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+}
+
+/* Label */
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+/* Value */
+.value {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Color variants */
+.value.green {
+  color: var(--accent-green);
+  text-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+}
+
+.value.red {
+  color: var(--accent-red);
+  text-shadow: 0 0 15px rgba(229, 48, 48, 0.2);
+}
+
+.value.yellow {
+  color: var(--accent-yellow);
+  text-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+}
+
+.value.white {
+  color: var(--text-primary);
+}
+
+/* Live indicator dot */
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  animation: statusPulse 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 4px var(--accent-green);
+  }
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 8px var(--accent-green);
+  }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .cols4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .statCard {
+    padding: 14px 12px;
+  }
+
+  .value {
+    font-size: 16px;
+  }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cols3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cols4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

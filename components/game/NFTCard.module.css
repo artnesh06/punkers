@@ -1,0 +1,617 @@
+/* ═══════════════════════════════════════
+   DEFAULT VARIANT (Original Card Style)
+   ═══════════════════════════════════════ */
+
+.card {
+  border: 2px solid var(--border-color);
+  background: var(--bg-card);
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.card:hover {
+  border-color: var(--border-glow);
+}
+
+.card.dead {
+  opacity: 0.5;
+}
+
+.card.danger {
+  border-color: var(--accent-red);
+  animation: dangerPulse 1s infinite;
+}
+
+@keyframes dangerPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 34, 34, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 0 rgba(255, 34, 34, 0.3);
+  }
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tokenId {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.status {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.status.staked {
+  color: var(--accent-green);
+}
+
+.attributes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.attribute {
+  font-size: 12px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+}
+
+.points {
+  font-size: 14px;
+  color: var(--accent-yellow);
+  margin-top: 4px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.shield {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 18px;
+  filter: drop-shadow(0 0 4px rgba(0, 150, 255, 0.5));
+}
+
+/* ═══════════════════════════════════════
+   GALLERY VARIANT (Home Page NFT Cards)
+   ═══════════════════════════════════════ */
+
+.nftCard {
+  position: relative;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nftCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-red),
+    var(--accent-orange),
+    transparent
+  );
+  opacity: 0.6;
+}
+
+.nftCard:hover {
+  border-color: var(--accent-red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(229, 48, 48, 0.15);
+}
+
+.nftEmoji {
+  font-size: 80px;
+  filter: grayscale(0.2);
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.nftCard:hover .nftEmoji {
+  transform: scale(1.1);
+}
+
+.nftImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.nftCard:hover .nftImage {
+  transform: scale(1.05);
+}
+
+.nftLabel {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: #fff;
+  background: var(--accent-red);
+  padding: 5px 10px;
+}
+
+/* Holographic shine effect */
+.nftCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  right: 0;
+  bottom: 0;
+  width: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 0, 60, 0.05) 40%,
+    rgba(0, 255, 102, 0.05) 50%,
+    rgba(255, 102, 0, 0.05) 60%,
+    transparent 70%
+  );
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.nftCard:hover::after {
+  transform: translateX(50%);
+}
+
+/* ═══════════════════════════════════════
+   STAKE VARIANT (Stake Page Cards)
+   ═══════════════════════════════════════ */
+
+.nftStakeCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 18px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(229, 48, 48, 0.1);
+  touch-action: manipulation;
+}
+
+.nftStakeCard.audited {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 15px rgba(229, 48, 48, 0.1);
+}
+
+.nftStakeCard:hover {
+  border-color: var(--border-glow) !important;
+  background: var(--bg-card-hover) !important;
+  transform: translateY(-1px);
+}
+
+.nftStakeCard:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.nftStakeCard.audited:hover {
+  border-color: var(--accent-red) !important;
+  box-shadow: 0 4px 20px rgba(229, 48, 48, 0.12) !important;
+}
+
+.nftStakeTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nftStakeAvatar {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  background: #fafafa;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  border-radius: 4px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.nftStakeAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nftStakeCard:hover .nftStakeAvatar {
+  transform: scale(1.06);
+  box-shadow: 0 0 16px rgba(229, 48, 48, 0.2);
+}
+
+.nftStakeCard.audited:hover .nftStakeAvatar {
+  box-shadow: 0 0 16px rgba(255, 102, 0, 0.3);
+}
+
+.nftStakeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  width: 100%;
+}
+
+.nftStakeName {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nftStakedDate {
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.nftStakedDate span {
+  color: var(--accent-yellow);
+}
+
+.nftStakeStatus {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.statusBadge {
+  font-family: var(--font-display);
+  font-size: 8px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.statusBadge.rip {
+  background: rgba(136, 136, 136, 0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(136, 136, 136, 0.3);
+}
+
+.statusBadge.audited {
+  background: rgba(255, 102, 0, 0.12);
+  color: var(--accent-orange);
+  border: 1px solid rgba(255, 102, 0, 0.3);
+}
+
+.statusBadge.staked {
+  background: rgba(0, 255, 102, 0.12);
+  color: var(--accent-green);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+}
+
+/* survival badge = same as staked */
+.statusBadge.survival {
+  background: var(--accent-green);
+  color: #000;
+}
+
+.statusBadge.alive {
+  background: rgba(0, 255, 102, 0.12);
+  color: var(--accent-green);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+}
+
+/* unstaked badge */
+.statusBadge.unstaked {
+  background: rgba(255, 204, 0, 0.12);
+  color: var(--accent-yellow);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+}
+
+.nftStakePoints {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.nftStakePoints span {
+  color: var(--accent-yellow);
+}
+
+.nftActions {
+  display: flex;
+  gap: 8px;
+}
+
+.nftActionBtn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex: 1;
+  min-height: 38px;
+}
+
+.nftActionBtn:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+}
+
+.stakeBtn {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: #fff;
+}
+
+.stakedBtn {
+  background: rgba(0, 255, 102, 0.12);
+  border-color: rgba(0, 255, 102, 0.3);
+  color: var(--accent-green);
+  cursor: default;
+}
+
+.stakedBtn:hover {
+  background: rgba(0, 255, 102, 0.12);
+  border-color: rgba(0, 255, 102, 0.3);
+}
+
+.stakeBtn:hover {
+  background: var(--accent-green-dim);
+  border-color: var(--accent-green-dim);
+}
+
+.unstakeBtn {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  color: #fff;
+}
+
+.unstakeBtn:hover {
+  background: var(--accent-red-glow);
+  border-color: var(--accent-red-glow);
+}
+
+.payBtn {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #fff;
+}
+
+.payBtn:hover {
+  background: #ff7700;
+  border-color: #ff7700;
+}
+
+.ripBtn {
+  background: rgba(136, 136, 136, 0.15);
+  border-color: rgba(136, 136, 136, 0.3);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.nextPayBtn {
+  background: rgba(0, 255, 102, 0.08);
+  border-color: rgba(0, 255, 102, 0.25);
+  color: var(--accent-green);
+  cursor: default;
+}
+
+.nextPayBtn:hover {
+  background: rgba(0, 255, 102, 0.12);
+  border-color: rgba(0, 255, 102, 0.35);
+}
+
+.claimBtn {
+  background: rgba(0, 255, 102, 0.12);
+  border-color: rgba(0, 255, 102, 0.3);
+  color: var(--accent-green);
+}
+
+.claimBtn:hover {
+  background: rgba(0, 255, 102, 0.2);
+  border-color: rgba(0, 255, 102, 0.5);
+}
+
+.stakeBtnYellow {
+  background: var(--accent-yellow);
+  border-color: var(--accent-yellow);
+  color: #000;
+  font-weight: bold;
+}
+
+.stakeBtnYellow:hover {
+  background: #e6b800;
+  border-color: #e6b800;
+  color: #000;
+}
+
+/* Stake layout modifiers */
+.layoutGrid3 .nftStakeAvatar {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+}
+
+.layoutGrid2 .nftStakeTop {
+  align-items: flex-start;
+}
+
+.layoutGrid2 .nftStakeAvatar {
+  width: 76px;
+  height: 76px;
+  min-width: 76px;
+}
+
+.layoutGrid4 {
+  padding: 14px;
+}
+
+.layoutGrid4 .nftStakeTop {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.layoutGrid4 .nftStakeInfo {
+  align-items: center;
+}
+
+.layoutGrid4 .nftStakeAvatar {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  font-size: 30px;
+}
+
+.layoutGrid4 .nftStakeName {
+  max-width: 100%;
+}
+
+.layoutList,
+.layoutListDetail {
+  padding: 12px 14px;
+}
+
+.layoutList .nftStakeTop,
+.layoutListDetail .nftStakeTop {
+  align-items: center;
+}
+
+.layoutList .nftStakeAvatar {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  font-size: 28px;
+}
+
+.layoutListDetail .nftStakeAvatar {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  font-size: 24px;
+}
+
+.layoutList .nftActionBtn,
+.layoutListDetail .nftActionBtn {
+  min-width: 160px;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE STYLES
+   ═══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .nftStakeCard {
+    padding: 14px;
+  }
+
+  .nftStakeAvatar {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    font-size: 30px;
+  }
+
+  .nftStakeName {
+    font-size: 13px;
+  }
+
+  .nftCard {
+    aspect-ratio: 3/4;
+  }
+
+  .nftEmoji {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 560px) {
+  .nftStakeInfo {
+    gap: 2px;
+  }
+
+  .nftStakeName {
+    font-size: 12px;
+  }
+
+  .statusBadge {
+    font-size: 7px;
+  }
+}
+
+/* Light mode overrides */
+:global(body.light-mode) .nftStakeAvatar,
+:global(body.light-mode) .avatar {
+  background: #ffffff;
+}

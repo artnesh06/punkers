@@ -1,0 +1,690 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(10, 10, 10, 0.97);
+  backdrop-filter: blur(12px);
+  height: 56px;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+  opacity: 0.3;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px rgba(229, 48, 48, 0.4), 0 0 40px rgba(229, 48, 48, 0.1);
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  padding: 16px 0;
+}
+
+.logo:hover {
+  animation: glitch 0.3s ease;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 1px);
+  }
+  40% {
+    transform: translate(2px, -1px);
+  }
+  60% {
+    transform: translate(-1px, -1px);
+  }
+  80% {
+    transform: translate(1px, 1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.navLinks {
+  display: flex;
+  gap: 0;
+  height: 100%;
+  align-items: stretch;
+}
+
+.navLink {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  background: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+.navLink:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+  background: rgba(229, 48, 48, 0.05);
+}
+
+.navLink.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.navLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-red);
+  box-shadow: 0 0 8px rgba(229, 48, 48, 0.4);
+}
+
+.navLink.locked {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.navLink.locked:hover {
+  color: var(--text-muted);
+  background: none;
+}
+
+/* ═══ NAV DROPDOWN ═══ */
+.navDropdown {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.navDropdownTrigger {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.04);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  background: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+.navDropdownTrigger:hover,
+.navDropdownTrigger.active {
+  color: var(--text-primary);
+  background: rgba(229, 48, 48, 0.05);
+}
+
+.navDropdownTrigger.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-red);
+  box-shadow: 0 0 8px rgba(229, 48, 48, 0.4);
+}
+
+.navDropdownTrigger.locked {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.navDropdownTrigger.locked:hover {
+  color: var(--text-muted);
+  background: none;
+}
+
+.navDropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #111;
+  border: 1px solid var(--border-color);
+  border-top: 2px solid var(--accent-red);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 200;
+  flex-direction: column;
+  min-width: 140px;
+}
+
+.navDropdownMenu.open {
+  display: flex;
+}
+
+.navDropdownLink {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding: 12px 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.navDropdownLink:last-child {
+  border-bottom: none;
+}
+
+.navDropdownLink:hover {
+  background: rgba(229, 48, 48, 0.08);
+  color: var(--text-primary);
+}
+
+.walletArea {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+/* Certificate Box */
+.certificateBox {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+  position: relative;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.certificateBox:hover {
+  border-color: var(--accent-yellow);
+  box-shadow: 0 0 10px rgba(255, 200, 0, 0.15);
+}
+
+/* PFP Box */
+.pfpBox {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+  position: relative;
+  text-decoration: none;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.pfpBox:hover {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 10px rgba(229, 48, 48, 0.15);
+  background: rgba(229, 48, 48, 0.05);
+}
+
+.pfpBox:active {
+  transform: scale(0.95);
+}
+
+.pfpBox.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pfpBox.disabled:hover {
+  border-color: var(--border-color);
+  box-shadow: none;
+  background: var(--bg-card);
+}
+
+.walletAvatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* Wallet gate toast */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--accent-red);
+  box-shadow: 0 0 24px rgba(229, 48, 48, 0.2);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  padding: 14px 24px;
+  z-index: 9999;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: toastIn 0.25s ease;
+  letter-spacing: 0.5px;
+}
+
+.toastButton {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--accent-red);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.toastButton:hover {
+  background: var(--accent-red-glow);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ═══ HAMBURGER BUTTON ═══ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  padding: 4px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.hamburger:hover {
+  border-color: var(--accent-red);
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-secondary);
+  transition: all 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--accent-red);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--accent-red);
+}
+
+/* ═══ MOBILE NAV DRAWER ═══ */
+.mobileNav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.97);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  flex-direction: column;
+  padding: 80px 24px 40px;
+  gap: 0;
+  overflow-y: auto;
+  animation: fadeIn 0.2s ease;
+}
+
+.mobileNav.open {
+  display: flex;
+}
+
+/* Add scanline effect to mobile nav */
+.mobileNav::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.mobileNavLink {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color 0.2s;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.mobileNavLink:hover,
+.mobileNavLink.active {
+  color: var(--text-primary);
+}
+
+.mobileNavLink.active {
+  color: var(--accent-red);
+}
+
+.mobileNavLink::after {
+  content: '→';
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.mobileNavLink.locked {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.mobileNavLink.indented {
+  padding-left: 24px;
+  font-size: 14px;
+}
+
+/* Mobile Nav Group */
+.mobileNavGroup {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.mobileNavGroupLabel {
+  font-family: var(--font-display);
+  font-size: 9px;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px 0 8px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobileNavGroupLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+/* Mobile Wallet Section */
+.mobileWalletSection {
+  margin-top: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile Wallet */
+.mobileWallet {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.mobileWallet:hover {
+  border-color: var(--accent-red);
+  background: rgba(229, 48, 48, 0.05);
+}
+
+.mobileWalletAvatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.mobileWalletAddress {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  letter-spacing: 1px;
+}
+
+/* Mobile Actions */
+.mobileActions {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.mobileActionBtn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.mobileActionBtn:hover {
+  border-color: var(--accent-yellow);
+  color: var(--text-primary);
+}
+
+.mobileWalletBtn {
+  width: 100%;
+}
+
+.mobileWalletBtn button {
+  width: 100%;
+  justify-content: center;
+}
+
+.mobileNavClose {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
+  z-index: 1;
+}
+
+.mobileNavClose:hover {
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+/* ═══ RESPONSIVE MEDIA QUERIES ═══ */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 16px;
+    height: 52px;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .walletArea {
+    gap: 8px;
+  }
+
+  /* Hide only wallet button in mobile navbar, keep certificate and PFP */
+  .walletArea > button:not(.hamburger):not(.certificateBox):not(.pfpBox) {
+    display: none;
+  }
+
+  .certificateBox,
+  .pfpBox {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar {
+    padding: 0 24px;
+  }
+
+  .navLink {
+    padding: 0 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+}
+
+/* Disabled box (certificate, profile) */
+.disabledBox {
+  opacity: 0.3;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}

@@ -1,0 +1,607 @@
+/* Gallery Page */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+/* Panel wrapper - no border/background, padding only */
+.panel {
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.header { margin-bottom: 24px; }
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--accent-yellow);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+}
+
+/* Scanline effect for h1 */
+.header h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 4px
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.header p {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Rarity Filter Tabs Row */
+.filterTabsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.filterTabs { display: flex; gap: 0; }
+.filterTab {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 10px 22px;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+}
+.filterTab:last-child { border-right: 1px solid var(--border-color); }
+.filterTab.active { 
+  background: var(--accent-red); 
+  border-color: var(--accent-red); 
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanline effect for active tab */
+.filterTab.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.filterTab.active span {
+  position: relative;
+  z-index: 2;
+}
+.filterTab:hover:not(.active) { background: rgba(255, 255, 255, 0.03); color: var(--text-primary); }
+.showingCount {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* Toolbar: filter toggle + search + layout switcher */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.search {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.search::placeholder { color: var(--text-muted); }
+.search:focus { border-color: var(--accent-red); outline: none; }
+
+.filterToggle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.filterToggle:hover { border-color: var(--accent-red); color: var(--text-primary); }
+.filterToggle.active { border-color: var(--accent-red); color: var(--accent-red); }
+
+.badge {
+  background: var(--accent-red);
+  color: #fff;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.clearBtn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.clearBtn:hover { border-color: var(--accent-red); color: var(--accent-red); }
+
+.layoutBtns { display: flex; gap: 4px; flex-shrink: 0; }
+.layoutBtn {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 4px;
+}
+.layoutBtn svg { width: 14px; height: 14px; fill: var(--text-muted); }
+.layoutBtn:hover { border-color: var(--accent-red); }
+.layoutBtn:hover svg { fill: var(--text-primary); }
+.layoutBtn.active { border-color: var(--accent-red); background: rgba(229, 48, 48, 0.1); }
+.layoutBtn.active svg { fill: var(--accent-red); }
+
+/* Active filter tags */
+.activeTags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border: 1px solid var(--accent-red);
+  background: rgba(229, 48, 48, 0.1);
+  color: var(--accent-red);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tag:hover { background: var(--accent-red); color: #fff; }
+
+/* ===== Main Content: Sidebar + Grid ===== */
+.mainContent {
+  display: flex;
+  gap: 0;
+}
+.mainContent.withSidebar {
+  gap: 20px;
+}
+.gridContent {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Left Sidebar */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card, rgba(255, 255, 255, 0.02));
+  align-self: flex-start;
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: sticky;
+  top: 0;
+  background: var(--bg-card, rgba(20, 20, 20, 1));
+  z-index: 1;
+}
+.sidebarFilters {
+  padding: 0;
+}
+
+/* Trait groups inside sidebar — OpenSea style accordion */
+.traitGroup {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border-color);
+}
+.traitHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 14px 16px;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s;
+}
+.traitHeader:hover { background: rgba(255, 255, 255, 0.03); }
+.traitHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.traitHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.chevron {
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+  opacity: 0.5;
+}
+.chevronOpen {
+  transform: rotate(0deg);
+}
+.traitName {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+.traitActiveBadge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  background: var(--accent-red);
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-weight: bold;
+  min-width: 18px;
+  text-align: center;
+}
+.traitCount {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.traitValues {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px 10px;
+  max-height: 280px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+/* Individual trait row — OpenSea list style */
+.traitRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.traitRow:hover { background: rgba(255, 255, 255, 0.04); }
+.traitRowActive { background: rgba(229, 48, 48, 0.08); }
+.traitRowActive:hover { background: rgba(229, 48, 48, 0.12); }
+
+.traitCheckbox {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.traitRowActive .traitCheckbox {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+}
+.traitCheckbox svg { color: #fff; }
+
+.traitRowLabel {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.traitRowActive .traitRowLabel { color: var(--text-primary); }
+
+.traitRowMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.traitRowCount {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.traitRowPct {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.6;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ===== NFT Grid ===== */
+.nftGrid {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.nftGrid.grid3 { grid-template-columns: repeat(3, 1fr); }
+.nftGrid.grid2 { grid-template-columns: repeat(2, 1fr); }
+.nftGrid.grid4 { grid-template-columns: repeat(4, 1fr); }
+.nftGrid.list { grid-template-columns: 1fr; gap: 4px; }
+.nftGrid.listDetail { grid-template-columns: 1fr; gap: 2px; }
+
+/* Gallery Card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.card:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+.card:active { transform: scale(0.98); opacity: 0.9; }
+
+.cardImg {
+  width: 74px; height: 74px; min-width: 74px;
+  background: #fafafa;
+  border: 1px solid var(--border-color);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: all 0.25s;
+  overflow: hidden;
+}
+.card:hover .cardImg { transform: scale(1.04); }
+
+.cardInfo { display: flex; flex-direction: column; gap: 5px; }
+.cardName {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.cardOwner {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+.cardRarity {
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.cardStatus { margin-top: 2px; }
+.statusBadge {
+  font-family: var(--font-display);
+  font-size: 8px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.statusBadge.alive { background: var(--accent-green); color: #000; }
+.statusBadge.rip { background: #444; color: #fff; }
+
+.cardExtra { display: none; }
+.cardStat { display: flex; justify-content: space-between; align-items: center; }
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.statVal {
+  font-family: var(--font-display);
+  font-size: 9px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+.statValMuted {
+  font-family: var(--font-display);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* Grid 2 — large cards */
+.nftGrid.grid2 .card {
+  align-items: stretch; padding: 0; gap: 0; overflow: hidden; flex-direction: row;
+}
+.nftGrid.grid2 .cardImg {
+  width: 200px; height: 200px; min-width: 200px;
+  font-size: 100px; border-radius: 0; border: none;
+  border-right: 1px solid var(--border-color);
+}
+.nftGrid.grid2 .cardInfo { flex: 1; padding: 16px 18px; gap: 0; justify-content: center; }
+.nftGrid.grid2 .cardName { font-size: 12px; margin-bottom: 3px; }
+.nftGrid.grid2 .cardRarity { font-size: 8px; letter-spacing: 2px; margin-bottom: 8px; }
+.nftGrid.grid2 .cardStatus { margin-bottom: 8px; }
+.nftGrid.grid2 .cardOwner { display: none; }
+.nftGrid.grid2 .cardExtra {
+  display: flex; flex-direction: column; gap: 4px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 8px; margin-top: 2px;
+}
+
+/* Grid 4 — small vertical cards */
+.nftGrid.grid4 .card {
+  flex-direction: column; align-items: center; text-align: center;
+  padding: 14px 10px; gap: 8px;
+}
+.nftGrid.grid4 .cardImg { width: 112px; height: 112px; font-size: 60px; }
+.nftGrid.grid4 .cardName { font-size: 11px; }
+
+/* List compact */
+.nftGrid.list .card { padding: 10px 20px; gap: 16px; justify-content: space-between; }
+.nftGrid.list .cardImg { width: 50px; height: 50px; min-width: 50px; font-size: 28px; }
+.nftGrid.list .cardInfo {
+  flex: 1; flex-direction: row; align-items: center;
+  justify-content: space-between; gap: 12px;
+}
+.nftGrid.list .cardName { font-size: 13px; }
+
+/* List detail */
+.nftGrid.listDetail .card {
+  display: grid;
+  grid-template-columns: 40px 1fr 140px 120px 130px;
+  align-items: center; gap: 0; padding: 10px 16px;
+}
+.nftGrid.listDetail .cardImg { width: 35px; height: 35px; min-width: 35px; font-size: 18px; }
+.nftGrid.listDetail .cardInfo { display: contents; }
+.nftGrid.listDetail .cardName { font-size: 13px; padding-left: 8px; }
+.nftGrid.listDetail .cardOwner { display: block; font-size: 11px; color: var(--text-muted); }
+.nftGrid.listDetail .cardRarity { text-align: center; }
+.nftGrid.listDetail .cardStatus { text-align: right; }
+
+/* Empty state */
+.empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.emptyIcon { font-size: 48px; margin-bottom: 12px; }
+.empty p { font-family: var(--font-mono); font-size: 16px; }
+
+/* Load more */
+.loadMore { text-align: center; margin: 24px 0; }
+.loadMoreBtn {
+  font-family: var(--font-mono); font-size: 13px;
+  padding: 10px 24px; border: 1px solid var(--border-color);
+  background: transparent; color: var(--text-secondary);
+  cursor: pointer; transition: all 0.2s;
+}
+.loadMoreBtn:hover { border-color: var(--accent-red); color: var(--accent-red); }
+
+/* Pagination */
+.pagination {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; margin: 24px 0 10px;
+}
+.pageBtn {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--bg-card, transparent);
+  border: 1px solid var(--border-color);
+  padding: 8px 14px; cursor: pointer; transition: all 0.2s;
+}
+.pageBtn:hover { border-color: var(--accent-red); color: var(--text-primary); }
+.pageBtn.active { background: var(--accent-red); border-color: var(--accent-red); color: #fff; }
+.pageBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.dots { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); padding: 8px 4px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .sidebar { width: 220px; min-width: 220px; }
+  .nftGrid.grid3 { grid-template-columns: repeat(2, 1fr); }
+  .nftGrid.grid4 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .filterTabsRow { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .mainContent { flex-direction: column; }
+  .mainContent.withSidebar { gap: 16px; }
+  .sidebar {
+    width: 100%; min-width: unset;
+    position: static;
+    max-height: 50vh;
+  }
+  .nftGrid.grid3, .nftGrid.grid4 { grid-template-columns: repeat(2, 1fr); }
+  .nftGrid.grid2 .cardImg { width: 140px; height: 140px; min-width: 140px; }
+}
+
+@media (max-width: 560px) {
+  .page { padding: 14px; }
+  .toolbar { flex-wrap: wrap; }
+  .search { width: 100%; order: 0; }
+  .nftGrid.grid3, .nftGrid.grid4, .nftGrid.grid2 { grid-template-columns: 1fr; }
+  .nftGrid.grid2 .card { flex-direction: column; }
+  .nftGrid.grid2 .cardImg {
+    width: 100%; height: 200px; min-width: unset;
+    border-right: none; border-bottom: 1px solid var(--border-color);
+  }
+  .pagination { flex-wrap: wrap; gap: 4px; }
+  .pageBtn { padding: 7px 10px; font-size: 12px; }
+  .nftGrid.listDetail .card { grid-template-columns: 35px 1fr auto; }
+  .nftGrid.listDetail .cardOwner { display: none; }
+}

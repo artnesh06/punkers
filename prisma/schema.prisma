@@ -1,0 +1,323 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model mst_users {
+  id              String   @id @default(uuid())
+  address         String   @unique
+  discord         String?  @unique
+  discordUsername String?
+  twitter         String?  @unique
+  twitterUsername String?
+  points          Int      @default(0)
+  favoritePfpTokenId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  stakers       mst_staker[]
+  transactions  trn_point[]
+  participants  trn_participant[]
+  certificate   mst_certificate?
+  lootOpens     trn_loot_open[]
+  ads           mst_ads[]
+
+  @@map("mst_users")
+}
+
+model mst_project {
+  id                String   @id @default(uuid())
+  name              String
+  leaderboard       Boolean  @default(true)
+  banner            String?
+  twitter           String?
+  discord           String?
+  website           String?
+  rewardFirstPlace  Int      @default(40)
+  rewardSecondPlace Int      @default(25)
+  rewardThirdPlace  Int      @default(15)
+  rewardTopTen      Int      @default(20)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  collections mst_collection[]
+  
+  @@map("mst_project")
+}
+
+model mst_collection {
+  id              String   @id @default(uuid())
+  projectId       String
+  contractAddress String   @unique
+  name            String
+  symbol          String?
+  totalSupply     Int?
+  floorPrice      Decimal? @db.Decimal(18, 8)
+  volume          Decimal? @db.Decimal(18, 8)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  project    mst_project @relation(fields: [projectId], references: [id])
+  rewards    mst_reward[]
+  stakers    mst_staker[]
+  attributes mst_attributes_reward[]
+  
+  @@map("mst_collection")
+}
+
+model mst_reward {
+  id           String   @id @default(uuid())
+  collectionId String
+  tokenId      String
+  pointsPerDay Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  collection mst_collection @relation(fields: [collectionId], references: [id])
+  
+  @@unique([collectionId, tokenId])
+  @@map("mst_reward")
+}
+
+model mst_staker {
+  id              String    @id @default(uuid())
+  userId          String
+  collectionId    String
+  tokenId         String
+  isStaked        Boolean   @default(false)
+  stakedAt        DateTime?
+  unstakedAt      DateTime?
+  isDead          Boolean   @default(false)
+  health          Int       @default(100)
+  causeOfDeath    String?
+  deathDate       DateTime?
+  lastAudit       DateTime?
+  lastTaxPayment  DateTime?
+  lastClaimDate   DateTime?
+  penaltiesPaid   Decimal   @default(0) @db.Decimal(18, 8)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  user       mst_users      @relation(fields: [userId], references: [id])
+  collection mst_collection @relation(fields: [collectionId], references: [id])
+  
+  @@unique([collectionId, tokenId])
+  @@map("mst_staker")
+}
+
+model mst_attributes_reward {
+  id           String   @id @default(uuid())
+  collectionId String
+  traitType    String
+  traitValue   String
+  bonusPoints  Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  collection mst_collection @relation(fields: [collectionId], references: [id])
+  
+  @@unique([collectionId, traitType, traitValue])
+  @@map("mst_attributes_reward")
+}
+
+model trn_point {
+  id          String   @id @default(uuid())
+  userId      String
+  points      Int
+  description String?
+  type        String
+  createdAt   DateTime @default(now())
+  
+  user mst_users @relation(fields: [userId], references: [id])
+  
+  @@map("trn_point")
+}
+
+model trn_participant {
+  id        String   @id @default(uuid())
+  userId    String
+  eventType String
+  metadata  Json?
+  createdAt DateTime @default(now())
+  
+  user mst_users @relation(fields: [userId], references: [id])
+  
+  @@map("trn_participant")
+}
+
+model gameState {
+  id            String   @id @default(uuid())
+  gameStartDate DateTime @default(now())
+  isActive      Boolean  @default(true)
+  totalStaked   Int      @default(0)
+  totalAlive    Int      @default(0)
+  totalDead     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("game_state")
+}
+
+model mst_game {
+  id              String    @id @default(uuid())
+  season          Int       @default(1)
+  name            String    @default("Season 1")
+  startDate       DateTime
+  endDate         DateTime?
+  durationDays    Int       @default(60)
+  survivorTarget  Int       @default(500)
+  taxSchedule     Json?
+  earnSchedule    Json?
+  status          String    @default("pending") // pending, active, ended
+  endedAt         DateTime?
+  endReason       String?   // "survivor_target_reached", "duration_ended", "manual"
+  totalParticipants Int     @default(0)
+  totalSurvivors  Int       @default(0)
+  totalDead       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  winners mst_winner[]
+
+  @@map("mst_game")
+}
+
+model mst_winner {
+  id          String   @id @default(uuid())
+  gameId      String
+  userId      String
+  address     String
+  tokenId     String
+  rank        Int
+  totalPoints Int      @default(0)
+  rarity      String   @default("common")
+  survivedDays Int     @default(0)
+  snapshotAt  DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  game mst_game @relation(fields: [gameId], references: [id])
+
+  @@unique([gameId, tokenId])
+  @@map("mst_winner")
+}
+
+model auditLog {
+  id        String   @id @default(uuid())
+  action    String   // 'AUDIT', 'EXECUTE', 'TAX_PAYMENT', etc.
+  actorId   String?  // User who performed the action
+  targetId  String?  // Target user/NFT
+  tokenId   String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  
+  @@map("audit_log")
+}
+
+model mst_certificate {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  totalXp   Int      @default(0)
+  level     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  user mst_users @relation(fields: [userId], references: [id])
+  
+  @@map("mst_certificate")
+}
+
+model trn_slot_spin {
+  id         String   @id @default(uuid())
+  userId     String
+  betAmount  Int
+  symbols    String   // Comma-separated symbols
+  payout     Int      @default(0)
+  resultType String   // 'lose', 'win', 'jackpot', 'mega'
+  createdAt  DateTime @default(now())
+  
+  @@map("trn_slot_spin")
+}
+
+model trn_loot_open {
+  id         String   @id @default(uuid())
+  userId     String
+  chestType  String   // 'common', 'rare', 'legendary'
+  cost       Int
+  lootEmoji  String
+  lootName   String
+  lootRarity String
+  payout     Int      @default(0)
+  createdAt  DateTime @default(now())
+  
+  user mst_users @relation(fields: [userId], references: [id])
+  
+  @@map("trn_loot_open")
+}
+
+model game_config {
+  id        String   @id @default("default")
+  config    Json     @default("{}")
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@map("game_config")
+}
+
+model mst_ads {
+  id            String   @id @default(uuid())
+  userId        String
+  message       String   @db.VarChar(100)
+  status        String   @default("ACTIVE")
+  cost          Int
+  durationHours Int
+  startDate     DateTime @default(now())
+  expireDate    DateTime
+  isVisible     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user mst_users @relation(fields: [userId], references: [id])
+
+  @@map("mst_ads")
+}
+
+model ads_pricing {
+  id            String   @id @default(uuid())
+  name          String
+  durationHours Int
+  price         Int
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("ads_pricing")
+}
+
+model trn_flower {
+  id           String   @id @default(uuid())
+  tokenId      String
+  giverAddress String
+  createdAt    DateTime @default(now())
+
+  @@index([giverAddress])
+  @@index([tokenId])
+  @@map("trn_flower")
+}
+
+model trn_distribution_reward {
+  id          String    @id @default(uuid())
+  address     String    @unique
+  count       Int
+  is_claimed  Boolean   @default(false)
+  claimed_at  DateTime?
+  claim_tx_id String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("trn_distribution_reward")
+}

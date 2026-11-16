@@ -1,0 +1,374 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #888;
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.balance {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: rgba(255, 204, 0, 0.1);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  border-radius: 8px;
+}
+
+.balanceLabel {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.balanceValue {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffcc00;
+  font-family: 'Courier New', monospace;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.statItem {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.machine {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  border: 2px solid #ffcc00;
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(255, 204, 0, 0.2);
+}
+
+.reels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.reel {
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.reel.spinning {
+  animation: reelSpin 0.1s linear infinite;
+  border-color: #ffcc00;
+}
+
+.reel.winner {
+  border-color: #00ff66;
+  background: rgba(0, 255, 102, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+}
+
+.reel.loser {
+  border-color: rgba(255, 255, 255, 0.1);
+  opacity: 0.5;
+}
+
+.symbol {
+  font-size: 64px;
+  user-select: none;
+}
+
+@keyframes reelSpin {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+.resultMsg {
+  text-align: center;
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease;
+}
+
+.resultMsg.lose {
+  background: rgba(255, 102, 102, 0.1);
+  border: 1px solid rgba(255, 102, 102, 0.3);
+  color: #ff6666;
+}
+
+.resultMsg.win {
+  background: rgba(255, 204, 0, 0.1);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  color: #ffcc00;
+}
+
+.resultMsg.jackpot {
+  background: rgba(0, 255, 102, 0.1);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  color: #00ff66;
+}
+
+.resultMsg.mega {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(255, 204, 0, 0.2));
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  animation: megaWin 0.5s ease infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes megaWin {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 204, 0, 0.8);
+  }
+}
+
+.betSelection {
+  margin-bottom: 24px;
+}
+
+.betLabel {
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.betButtons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.betBtn {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.betBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffcc00;
+}
+
+.betBtn.active {
+  background: rgba(255, 204, 0, 0.2);
+  border-color: #ffcc00;
+  color: #ffcc00;
+}
+
+.betBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spinBtn {
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.spinBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 204, 0, 0.4);
+}
+
+.spinBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.spinBtn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: #666;
+  cursor: not-allowed;
+}
+
+.netProfit {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.netLabel {
+  font-size: 14px;
+  color: #888;
+  margin-right: 12px;
+}
+
+.netValue {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.netValue.positive {
+  color: #00ff66;
+}
+
+.netValue.negative {
+  color: #ff6666;
+}
+
+.recentSpins {
+  margin-top: 32px;
+}
+
+.recentSpins h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.spinsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.spinItem {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.spinSymbols {
+  display: flex;
+  gap: 8px;
+  font-size: 24px;
+}
+
+.spinBet {
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+}
+
+.spinPayout {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+.spinPayout.win {
+  color: #00ff66;
+}
+
+.spinPayout.lose {
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .symbol {
+    font-size: 48px;
+  }
+
+  .balanceValue {
+    font-size: 24px;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .betButtons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .spinBtn {
+    font-size: 16px;
+    padding: 16px;
+  }
+
+  .spinItem {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .spinPayout {
+    text-align: center;
+  }
+}

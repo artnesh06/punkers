@@ -1,0 +1,27 @@
+.panel {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 14px;
+  text-align: center;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--dim);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 32px;
+  color: var(--text);
+}
+
+.value.danger {
+  color: var(--red);
+}
+
+.value.success {
+  color: var(--green);
+}

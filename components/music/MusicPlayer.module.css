@@ -1,0 +1,204 @@
+/* Nav button — matches scroll button size */
+.navBtn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.navBtn:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+/* Floating panel — matches scroll button positioning */
+.panel {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  width: 300px;
+  background: #0d0d0d;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  z-index: 9000;
+  font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+}
+
+.panel.minimized .panelBody {
+  display: none;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  background: none;
+  width: 100%;
+  font-family: var(--font-mono);
+  color: inherit;
+}
+
+.panelTitle {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--accent-red);
+}
+
+.panelControls {
+  display: flex;
+  gap: 6px;
+}
+
+.panelControls button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 4px;
+}
+
+.panelControls button:hover {
+  color: #fff;
+}
+
+.panelBody {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nowPlaying {
+  font-size: 10px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nowPlaying span {
+  color: var(--text-primary);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.mpBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 16px;
+  padding: 4px;
+  transition: color 0.15s;
+}
+
+.mpBtn:hover {
+  color: #fff;
+}
+
+.mpBtn.active {
+  color: var(--accent-red);
+}
+
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 160px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.playlist::-webkit-scrollbar {
+  width: 4px;
+}
+
+.playlist::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.playlist::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.playlist::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.track {
+  padding: 6px 8px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  gap: 8px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-mono);
+}
+
+.track:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.trackActive {
+  color: var(--accent-red);
+  background: rgba(229, 48, 48, 0.08);
+}
+
+.trackNum {
+  min-width: 14px;
+  text-align: center;
+}
+
+.trackName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .navBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .panel {
+    bottom: 16px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+}

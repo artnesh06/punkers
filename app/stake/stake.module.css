@@ -1,0 +1,442 @@
+/* Stake page specific styles */
+
+/* Page Container - matching survival/graveyard */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+/* Panel wrapper - no border/background, padding only */
+.panel {
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+/* Stats Grid - matching survival page */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 18px 16px;
+  text-align: center;
+  position: relative;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.statValue.green {
+  color: var(--accent-green);
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.2);
+}
+
+.statValue.red {
+  color: var(--accent-red);
+  text-shadow: 0 0 12px rgba(229, 48, 48, 0.2);
+}
+
+.statValue.yellow {
+  color: var(--accent-yellow);
+  text-shadow: 0 0 12px rgba(255, 204, 0, 0.2);
+}
+
+.statValue.white {
+  color: var(--text-primary);
+}
+
+/* Controls Row - Filter and Layout Controls */
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filterSection {
+  flex: 1;
+  min-width: 0;
+}
+
+.layoutSection {
+  flex-shrink: 0;
+}
+
+.showingCount {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* NFT Grid Layouts */
+.nftGrid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* Grid 3 - Default 3 column layout */
+.nftGrid.grid3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Grid 2 - 2 column layout */
+.nftGrid.grid2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Grid 4 - 4 column layout */
+.nftGrid.grid4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* List - Single column with compact cards */
+.nftGrid.list {
+  grid-template-columns: 1fr;
+}
+
+/* List Detail - Single column with expanded cards */
+.nftGrid.listDetail,
+.nftGrid.list-detail {
+  grid-template-columns: 1fr;
+}
+
+/* Section Header */
+.sectionHeader {
+  margin-bottom: 20px;
+}
+
+.sectionHeader h1 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: #ffcc00;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionHeader p {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #888;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+.taxTimer {
+  font-size: 12px;
+  color: var(--gold);
+  text-align: center;
+  padding: 4px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid var(--gold);
+  animation: pulse 2s ease-in-out infinite alternate;
+}
+
+.taxTimer.urgent {
+  color: var(--red);
+  background: rgba(255, 34, 34, 0.1);
+  border-color: var(--red);
+  animation: blink 1s step-end infinite;
+}
+
+.bulkActions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  padding: 12px 20px;
+  letter-spacing: 2px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.actionButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stakeButton {
+  background: var(--green);
+  color: #000;
+  border-color: var(--green);
+}
+
+.stakeButton:hover:not(:disabled) {
+  background: #00cc55;
+}
+
+.taxButton {
+  background: var(--red);
+  color: #000;
+  border-color: var(--red);
+}
+
+.taxButton:hover:not(:disabled) {
+  background: #cc0000;
+}
+
+.nftActions {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}
+
+.smallButton {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 8px 12px;
+  width: 100%;
+  letter-spacing: 1px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.smallButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .layoutSection {
+    width: 100%;
+  }
+
+  .sectionHeader h1 {
+    font-size: 16px;
+  }
+
+  .sectionHeader p {
+    font-size: 13px;
+  }
+
+  /* Responsive grid layouts for tablet */
+  .nftGrid.grid3,
+  .nftGrid.grid4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nftGrid.grid2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .showingCount {
+    font-size: 14px;
+  }
+
+  /* Responsive grid layouts for mobile */
+  .nftGrid.grid3,
+  .nftGrid.grid4,
+  .nftGrid.grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .sectionHeader h1 {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+}
+
+/* Enter Game Button */
+.enterGameBtn {
+  width: 100%;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--accent-green, #00ff66);
+  color: #000;
+  border: 1px solid var(--accent-green, #00ff66);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.enterGameBtn:hover:not(:disabled) {
+  background: #00cc55;
+  border-color: #00cc55;
+}
+
+.enterGameBtn:disabled {
+  background: var(--bg-card, #1a1a1a);
+  color: var(--dim, #555);
+  border-color: var(--border-color, #333);
+  cursor: not-allowed;
+}
+
+/* NFT Card Wrapper (button reset) */
+.nftCardWrapper {
+  all: unset;
+  display: block;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* Action Row: PAY ALL TAX + STAKE ALL */
+.actionRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.actionBtnRed,
+.actionBtnYellow,
+.actionBtnGreen {
+  flex: 1;
+  padding: 18px 24px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.15s;
+}
+
+.actionBtnRed {
+  background: var(--accent-red, #e53030);
+  color: #fff;
+}
+
+.actionBtnYellow {
+  background: var(--accent-yellow, #ffcc00);
+  color: #000;
+}
+
+.actionBtnGreen {
+  background: var(--accent-green, #00ff66);
+  color: #000;
+}
+
+.actionBtnRed:hover,
+.actionBtnYellow:hover,
+.actionBtnGreen:hover {
+  filter: brightness(1.15);
+}
+
+.actionBtnRed:disabled,
+.actionBtnYellow:disabled,
+.actionBtnGreen:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.actionBtnTitle {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.actionBtnSub {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  opacity: 0.85;
+  display: block;
+}
+
+.unpaidNum {
+  animation: pulse 1.8s ease-in-out infinite;
+  display: inline;
+}
+
+@media (max-width: 560px) {
+  .actionRow {
+    flex-direction: column;
+  }
+  
+  .page {
+    padding: 14px;
+  }
+}
+
+/* Lock Screen */
+.lock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+  gap: 20px;
+}

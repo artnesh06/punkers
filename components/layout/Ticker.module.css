@@ -1,0 +1,55 @@
+/* ═══ AD BANNER ═══ */
+.adBanner {
+  background: rgba(10, 10, 10, 0.97);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent-red);
+  letter-spacing: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Static ad (no data) */
+.adStatic {
+  text-align: center;
+  opacity: 0.85;
+  letter-spacing: 1px;
+}
+
+.adTickerWrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.adTicker {
+  display: inline-flex;
+  gap: 60px;
+  animation: tickerScroll 80s linear infinite;
+  white-space: nowrap;
+}
+
+.adItem {
+  opacity: 0.85;
+  cursor: pointer;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.adItem:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.adTicker.paused {
+  animation-play-state: paused;
+}
+
+@keyframes tickerScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

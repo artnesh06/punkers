@@ -1,0 +1,166 @@
+/* Ad Modal Overlay with backdrop blur */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.overlay.open {
+  display: flex;
+}
+
+/* Ad Modal Container with red border and shadow */
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--accent-red);
+  box-shadow: 
+    0 0 30px rgba(229, 48, 48, 0.2),
+    0 0 60px rgba(229, 48, 48, 0.05);
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 28px 24px;
+  position: relative;
+  font-family: var(--font-mono);
+  animation: modalIn 0.2s ease;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+/* Modal tag with red accent */
+.tag {
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+/* Message with left border */
+.message {
+  font-size: 17px;
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+  border-left: 3px solid var(--accent-red);
+  padding-left: 14px;
+}
+
+/* Info rows container */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Info row with key-value pairs */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row .key {
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.row .val {
+  color: var(--text-primary);
+}
+
+/* Footer hint */
+.hint {
+  text-align: center;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.15);
+  letter-spacing: 1px;
+}
+
+/* Animations */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  .overlay {
+    padding: 20px;
+    align-items: center;
+  }
+
+  .modal {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .closeButton {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+
+  .message {
+    font-size: 15px;
+  }
+
+  .row {
+    font-size: 13px;
+  }
+
+  .row .key {
+    font-size: 11px;
+  }
+}

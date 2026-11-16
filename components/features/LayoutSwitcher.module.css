@@ -1,0 +1,107 @@
+/* Layout Switcher Container */
+.layoutBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* Layout Label */
+.layoutLabel {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Layout Buttons Container */
+.layoutButtons {
+  display: flex;
+  gap: 4px;
+}
+
+/* Individual Layout Button */
+.layoutButton {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect */
+.layoutButton:hover {
+  border-color: var(--text-muted);
+}
+
+/* Active state styling */
+.layoutButton.active {
+  border-color: var(--accent-red);
+  background: rgba(229, 48, 48, 0.1);
+}
+
+/* SVG icon styling */
+.layoutButton svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-muted);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.layoutButton.active svg {
+  stroke: var(--accent-red);
+}
+
+/* Scanline effect for buttons (matching HTML source) */
+.layoutButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateY(-100%);
+  transition: transform 0.6s ease;
+}
+
+.layoutButton:hover::after {
+  transform: translateY(100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 560px) {
+  .layoutBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .layoutLabel {
+    font-size: 11px;
+  }
+
+  .layoutButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .layoutButton svg {
+    width: 14px;
+    height: 14px;
+  }
+}

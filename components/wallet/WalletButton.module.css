@@ -1,0 +1,186 @@
+.walletButton {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 0;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.walletButton:hover:not(:disabled) {
+  border-color: var(--accent-green-dim);
+  color: var(--accent-green);
+}
+
+.walletButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.walletButton.connected {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.walletButton.connected:hover {
+  border-color: var(--accent-green-dim);
+  color: var(--accent-green);
+}
+
+/* Disconnected state - red border and text */
+.walletButton:not(.connected) {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+.walletButton:not(.connected):hover:not(:disabled) {
+  border-color: var(--accent-red-glow);
+  color: var(--accent-red-glow);
+}
+
+/* Wallet popup wrapper */
+.walletWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Popup dropdown */
+.walletPopup {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  background: #111;
+  border: 1px solid var(--border-color);
+  border-top: 2px solid var(--accent-red);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 300;
+  animation: popupIn 0.15s ease;
+}
+
+@keyframes popupIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.popupHeader {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.popupAddress {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-green);
+  letter-spacing: 1px;
+}
+
+.popupSection {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.popupLabel {
+  font-family: var(--font-display);
+  font-size: 8px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.popupSocialRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.popupSocialIcon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.popupSocialName {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-primary);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.popupSocialAction {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+
+.popupSocialAction:hover {
+  color: var(--accent-red);
+}
+
+.popupSocialAction:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.popupConnectBtn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.15s;
+  flex: 1;
+}
+
+.popupConnectBtn:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.popupDisconnect {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-red);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.15s;
+}
+
+.popupDisconnect:hover {
+  background: rgba(229, 48, 48, 0.08);
+}

@@ -1,0 +1,89 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.icon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.label {
+  line-height: 1;
+}
+
+/* Sizes */
+.small {
+  padding: 2px 6px;
+  font-size: 9px;
+  gap: 4px;
+}
+
+.small .icon {
+  font-size: 10px;
+}
+
+.medium {
+  padding: 4px 10px;
+  font-size: 11px;
+  gap: 6px;
+}
+
+.medium .icon {
+  font-size: 12px;
+}
+
+.large {
+  padding: 6px 14px;
+  font-size: 13px;
+  gap: 8px;
+}
+
+.large .icon {
+  font-size: 14px;
+}
+
+/* Colors */
+.green {
+  border-color: var(--accent-green);
+  background: rgba(0, 255, 102, 0.1);
+  color: var(--accent-green);
+}
+
+.orange {
+  border-color: var(--accent-orange);
+  background: rgba(255, 102, 0, 0.1);
+  color: var(--accent-orange);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.red {
+  border-color: var(--accent-red);
+  background: rgba(229, 48, 48, 0.1);
+  color: var(--accent-red);
+}
+
+.gray {
+  border-color: var(--text-muted);
+  background: rgba(136, 136, 136, 0.1);
+  color: var(--text-muted);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

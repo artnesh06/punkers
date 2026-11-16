@@ -1,0 +1,106 @@
+
+      {/* NFT Detail Modal */}
+      {showNFTModal && selectedNFT && (
+        <div className={modalStyles.nftModalOverlay} onClick={(e) => {
+          if (e.target === e.currentTarget) closeNFTModal();
+        }}>
+          <div className={modalStyles.nftModalBox} style={{ '--modal-rarity-color': getRarityColor(selectedNFT.rarity) } as React.CSSProperties}>
+            
+            {/* LEFT: Art Panel */}
+            <div className={modalStyles.nftModalLeft}>
+              <div className={modalStyles.nftModalArtGlow} />
+              <div className={modalStyles.nftModalAvatar}>
+                {selectedNFT.metadata?.image ? (
+                  <img src={selectedNFT.metadata.image} alt={selectedNFT.metadata?.name || `#${selectedNFT.tokenId}`} />
+                ) : (
+                  <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '120px' }}>
+                    💀
+                  </div>
+                )}
+              </div>
+              <div className={modalStyles.nftModalArtInfo}>
+                <div className={modalStyles.nftModalName}>{selectedNFT.metadata?.name || `Punker #${selectedNFT.tokenId}`}</div>
+                <div className={modalStyles.nftModalRarity} style={{ color: getRarityColor(selectedNFT.rarity) }}>
+                  ★ {selectedNFT.rarity || 'COMMON'}
+                </div>
+                <div className={modalStyles.nftModalStatusWrap}>
+                  {selectedNFT.status === 'RIP' || selectedNFT.health <= 0 ? (
+                    <span className={styles.statusBadgeDead}>🪦 RIP</span>
+                  ) : selectedNFT.status === 'Audited' ? (
+                    <span className={styles.statusBadgeAudited}>⚠️ UNPAID</span>
+                  ) : (
+                    <span className={styles.statusBadgeAlive}>✓ ALIVE</span>
+                  )}
+                </div>
+              </div>
+              <div className={modalStyles.nftModalActions}>
+                <button onClick={handleDownloadCard}>DOWNLOAD</button>
+                <button onClick={handleViewOnOpenSea}>VIEW ON OPENSEA</button>
+                <button onClick={handleOnchainStatus}>ONCHAIN STATUS</button>
+              </div>
+            </div>
+
+            {/* RIGHT: Stats Panel */}
+            <div className={modalStyles.nftModalRight}>
+              <div className={modalStyles.nftModalRightHeader}>● DETAILS</div>
+              
+              {/* Quick Stats */}
+              <div className={modalStyles.modalQuickStats}>
+                <div className={modalStyles.quickStat}>
+                  <div className={modalStyles.quickStatLbl}>POINTS</div>
+                  <div className={modalStyles.quickStatVal} style={{ color: 'var(--accent-yellow)' }}>312</div>
+                </div>
+                <div className={modalStyles.quickStat}>
+                  <div className={modalStyles.quickStatLbl}>EARNINGS</div>
+                  <div className={modalStyles.quickStatVal} style={{ color: 'var(--accent-green)' }}>12</div>
+                </div>
+                <div className={modalStyles.quickStat}>
+                  <div className={modalStyles.quickStatLbl}>BALANCE</div>
+                  <div className={modalStyles.quickStatVal} style={{ color: 'var(--accent-green)' }}>+6/day</div>
+                </div>
+              </div>
+
+              {/* Health Bar */}
+              <div className={modalStyles.modalHealthWrap}>
+                <div className={modalStyles.modalHealthLabel}>
+                  <span>HEALTH</span>
+                  <span style={{ color: selectedNFT.health >= 75 ? 'var(--accent-green)' : selectedNFT.health >= 40 ? 'var(--accent-yellow)' : 'var(--accent-red)' }}>
+                    {selectedNFT.health}%
+                  </span>
+                </div>
+                <div className={modalStyles.modalHealthBar}>
+                  <div 
+                    className={modalStyles.modalHealthFill} 
+                    style={{ 
+                      width: `${selectedNFT.health}%`,
+                      background: selectedNFT.health >= 75 ? 'var(--accent-green)' : selectedNFT.health >= 40 ? 'var(--accent-yellow)' : 'var(--accent-red)'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Attribute Rows */}
+              <div className={modalStyles.nftModalRows}>
+                <div className={modalStyles.nftModalRow}>
+                  <span className={modalStyles.rowKey}>TOKEN ID</span>
+                  <span className={modalStyles.rowVal}>#{selectedNFT.tokenId}</span>
+                </div>
+                <div className={modalStyles.nftModalRow}>
+                  <span className={modalStyles.rowKey}>RARITY</span>
+                  <span className={modalStyles.rowVal} style={{ color: getRarityColor(selectedNFT.rarity) }}>
+                    {selectedNFT.rarity || 'common'}
+                  </span>
+                </div>
+                <div className={modalStyles.nftModalRow}>
+                  <span className={modalStyles.rowKey}>TAX/DAY</span>
+                  <span className={modalStyles.rowVal} style={{ color: 'var(--accent-red)' }}>6 $PUNK/day</span>
+                </div>
+                <div className={modalStyles.nftModalRow}>
+                  <span className={modalStyles.rowKey}>STAKED SINCE</span>
+                  <span className={modalStyles.rowVal}>Day 1</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
